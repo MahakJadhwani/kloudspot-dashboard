@@ -1,35 +1,30 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/TempLogin";
 import Dashboard from "./pages/TempDashboard";
 import CrowdEntries from "./pages/CrowdEntries";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AppLayout from "./layouts/AppLayoutTemp";
 
 function App() {
   return (
     <Routes>
-      {/* Public Route */}
+      {/* Public route */}
       <Route path="/login" element={<Login />} />
 
-      {/* Protected Routes */}
+      {/* Protected app routes */}
       <Route
-        path="/dashboard"
         element={
           <ProtectedRoute>
-            <Dashboard />
+            <AppLayout />
           </ProtectedRoute>
         }
-      />
-      <Route
-        path="/crowd-entries"
-        element={
-          <ProtectedRoute>
-            <CrowdEntries />
-          </ProtectedRoute>
-        }
-      />
+      >
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/crowd-entries" element={<CrowdEntries />} />
+      </Route>
 
-      {/* Fallback route: redirect unknown paths to login */}
-      <Route path="*" element={<Login />} />
+      {/* Default redirect */}
+      <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   );
 }

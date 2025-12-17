@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 🔒 Hard safety reset to prevent invisible UI */
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #111827; /* gray-900 */
+  background-color: #f9fafb; /* gray-50 */
+}
